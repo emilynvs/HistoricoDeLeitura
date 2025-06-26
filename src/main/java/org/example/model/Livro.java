@@ -64,5 +64,18 @@ public class Livro {
         this.formato = formato;
     }
 
-
+    @Override
+    public String toString() {
+        /* FALTA
+         * numero do id
+         * aparecer qual o formato(por enquanto só está null
+         * */
+        return "Livro{" +
+                "titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", paginas=" + paginas +
+                ", status=" + status +
+                ", formato=" + formato +
+                '}';
+    }
 }

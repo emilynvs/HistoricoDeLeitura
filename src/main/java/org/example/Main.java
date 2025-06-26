@@ -11,10 +11,10 @@ public class Main {
 
         public static void main(String[] args) throws SQLException {
                 LivroDAO dao = new LivroDAO();
-                Livro livro = new Fisico("O Cortiço", "Aluíso Azevedo", 232, Status.QUERO_LER);
-                dao.salva(livro);
+               //Livro livro = new Fisico("E Não Sobrou Nenhum", "Agatha Chrstie", 400, Status.LI);
+                // dao.salva(livro);
 
-                dao.listaTudo();
+               System.out.println(dao.buscaLivro("o cortiço"));
         }
 
 }
