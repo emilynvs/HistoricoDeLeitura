@@ -7,7 +7,9 @@ import org.example.model.enums.Status;
 
 import java.sql.*;
 import java.sql.Connection;
-
+/**
+ * Esqueci de colocar para exibir em buscaLivro, todos os livros que possuem o titulo inserido
+ * */
 
 public class LivroDAO {
     Connection connection = ConnectionFactory.getConnection();
@@ -36,8 +38,14 @@ public class LivroDAO {
 
     }
 
-    public void excui() {
-
+    public void excui(int id) {
+        try{
+            prepared = connection.prepareStatement("DELETE FROM livro WHERE id = ?");
+            prepared.setInt(1, id);
+            prepared.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Livro buscaLivro(String titulo){
@@ -48,11 +56,12 @@ public class LivroDAO {
             resultSet = prepared.executeQuery();
             if(resultSet.next()){ //ele verifica se a consulta encontrou o livro com o titulo informado
                 //se encontrou o livro, carrega os dados
+                livro.setId(resultSet.getInt("id"));
                 livro.setTitulo(resultSet.getString("nome"));
                 livro.setAutor(resultSet.getString("autor"));
                 livro.setPaginas(resultSet.getInt("paginas"));
                 livro.setStatus(Status.valueOf(resultSet.getString("status")));
-                // livro.setFormato(Formato.valueOf(resultSet.getString("formato")));
+                livro.setFormato(Formato.valueOf(resultSet.getString("formato")));
 
                 return livro;
             }else{

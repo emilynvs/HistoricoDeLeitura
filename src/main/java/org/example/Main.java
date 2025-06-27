@@ -11,10 +11,7 @@ public class Main {
 
         public static void main(String[] args) throws SQLException {
                 LivroDAO dao = new LivroDAO();
-               //Livro livro = new Fisico("E Não Sobrou Nenhum", "Agatha Chrstie", 400, Status.LI);
-                // dao.salva(livro);
 
-               System.out.println(dao.buscaLivro("o cortiço"));
         }
 
 }

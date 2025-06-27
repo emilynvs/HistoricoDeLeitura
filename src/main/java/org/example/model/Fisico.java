@@ -7,6 +7,6 @@ import java.util.EnumSet;
 
 public class Fisico extends Livro {
     public Fisico(String titulo, String autor, int paginas, Status status) {
-        super(titulo, autor, paginas, status, EnumSet.of(Formato.FISICO));
+        super(titulo, autor, paginas, status, Formato.FISICO);
     }
 }

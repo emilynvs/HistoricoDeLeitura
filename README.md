@@ -1,28 +1,53 @@
-# 📚 Gerenciador de Leitura
+# 📚 Histórico Literário
+
+Uma aplicação Java com persistência em banco de dados MySQL para registrar, acompanhar e organizar sua vida de leitura — com foco em progresso, reflexão e gestão pessoal do hábito de leitura.
+
+---
 
 ## 🎯 Objetivo
-Criar uma **biblioteca pessoal e virtual**, possibilitando ao usuário:
+Construir uma **biblioteca pessoal virtual**, permitindo ao usuário:
 
-- Atualizar o **histórico de leitura**
-- Marcar **qual livro começou a ler**
-- Registrar **quantas páginas leu**
-- Adicionar livros à **lista de leitura desejada**
+- Cadastrar livros físicos ou digitais
+- Atualizar o histórico de leitura
+- Marcar livros de acordo com seu status (exemplo: lidos, lendo, desejados)
+- Organizar livros por autor, gênero e tipo
+- Acompanhar sua jornada literária ao longo do tempo
 
-## 🧠 Funcionalidades previstas
-- [x] Cadastro de livros físicos e ebooks
-- [ ] Listagem de todos os livros da biblioteca
-- [ ] Busca de livro por nome
-- [ ] Atualização de progresso de leitura
-- [ ] Filtro por autor, gênero e tipo
-- [ ] Lista de leitura desejada
-- [ ] Relatório de livros lidos
+---
 
-## 🛠️ Tecnologias usadas / previstas
+## 🌟 Funcionalidades da versão 1.0 (MVP)
+- [x] Cadastro de livros com título, autor, tipo (físico/ebook), status e gênero
+- [ ] Visualização de todos os livros cadastrados
+- [x] Armazenamento em banco de dados MySQL
+- [x] Busca de livros por título
+- [ ] Edição de informações de um livro
+- [ ] Remoção de livro do sistema
+
+---
+
+## 🔮 Funcionalidades futuras
+- [ ] Atualização de progresso de leitura (páginas lidas)
+- [ ] Filtro por autor, gênero, tipo e status
+- [ ] Lista de leitura desejada separada
+- [ ] Relatório com total de livros lidos
+- [ ] Integração com Spring Boot
+
+---
+
+## 🛠️ Tecnologias utilizadas
 - Java
-- Spring Boot (futuramente)
-- POO
-- Padrão MVC
-- Persistência banco de dados (MySQL)
+- Banco de Dados MySQL
+- Padrão MVC (em construção)
+- Programação Orientada a Objetos (POO)
+
+---
 
 ## 🚧 Status
 Projeto em desenvolvimento inicial, MYSQL está integrado e é possível salvar livros, o método de busca precisa de alguns ajustes
+
+---
+
+## 👩‍💻 Autora
+
+Emily • Estudante de Análise e Desenvolvimento de Sistemas • Apaixonada por livros, fé e desenvolvimento de software.  
+📫 [LinkedIn](https://www.linkedin.com/in/emily-neves-nascimento-17a2a7326/) | [GitHub](https://github.com/emilynvs)
