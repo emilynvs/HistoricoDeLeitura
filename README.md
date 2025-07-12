@@ -17,11 +17,11 @@ Construir uma **biblioteca pessoal virtual**, permitindo ao usuário:
 
 ## 🌟 Funcionalidades da versão 1.0 (MVP)
 - [x] Cadastro de livros com título, autor, tipo (físico/ebook), status e gênero
-- [ ] Visualização de todos os livros cadastrados
+- [x] Visualização de todos os livros cadastrados
 - [x] Armazenamento em banco de dados MySQL
 - [x] Busca de livros por título
 - [ ] Edição de informações de um livro
-- [ ] Remoção de livro do sistema
+- [x] Remoção de livro do sistema
 
 ---
 
@@ -43,7 +43,7 @@ Construir uma **biblioteca pessoal virtual**, permitindo ao usuário:
 ---
 
 ## 🚧 Status
-Projeto em desenvolvimento inicial, MYSQL está integrado e é possível salvar livros, o método de busca precisa de alguns ajustes
+Projeto em desenvolvimento CRUD em livro quase completo, histórico sendo iniciado
 
 ---
 
