@@ -76,16 +76,13 @@ public class Livro {
 
     @Override
     public String toString() {
-        /* FALTA
-         * numero do id
-         * */
-        return "Livro{" +
+        return "Livro {" +
                 "ID = " + id +
-                " titulo = '" + titulo + '\'' +
-                ", autor = '" + autor + '\'' +
-                ", páginas = " + paginas +
-                ", status = " + status +
-                ", formato = " + formato +
-                '}';
+                ", \ntitulo = '" + titulo + '\'' +
+                ", \nautor = '" + autor + '\'' +
+                ", \npáginas = " + paginas +
+                ", \nstatus = " + status +
+                ", \nformato = " + formato +
+                "}\n";
     }
 }
