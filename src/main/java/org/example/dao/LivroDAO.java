@@ -22,7 +22,7 @@ public class LivroDAO {
         String sql = "INSERT INTO livro(nome, autor, paginas, status, formato) values (?,?,?,?,?)";
         //cada ponto de interrogação equivale a uma posição que coloquei abaixo
         try {
-            PreparedStatement prepared = connection.prepareStatement(sql);
+            prepared = connection.prepareStatement(sql);
             prepared.setString(1, livro.getTitulo());
             prepared.setString(2, livro.getAutor());
             prepared.setInt(3, livro.getPaginas());
@@ -49,7 +49,7 @@ public class LivroDAO {
         }
     }
 
-    public ArrayList<String> buscaLivro(String titulo){
+    public ArrayList<String> buscaLivros(String titulo){
         Livro livro  = new Livro();
         ArrayList <String> livroArrayList = new ArrayList<>();
         try {
@@ -71,6 +71,27 @@ public class LivroDAO {
             throw new RuntimeException(e);
         }
         return livroArrayList;
+    }
+
+    public Livro buscaLivro(String titulo){
+        Livro livro  = new Livro();
+        try {
+            prepared = connection.prepareStatement("SELECT * FROM livro WHERE nome = ?"); // criando um comando set incompleto
+            prepared.setString(1, titulo); // adicionando o completo para subistituir o ponto de interrogação
+            resultSet = prepared.executeQuery();
+            if (resultSet.next()){ //ele verifica se a consulta encontrou o livro com o titulo informado
+                //se encontrou o livro, carrega os dados
+                livro.setId(resultSet.getInt("id"));
+                livro.setTitulo(resultSet.getString("nome"));
+                livro.setAutor(resultSet.getString("autor"));
+                livro.setPaginas(resultSet.getInt("paginas"));
+                livro.setStatus(Status.valueOf(resultSet.getString("status")));
+                livro.setFormato(Formato.valueOf(resultSet.getString("formato")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return livro;
     }
 
     public void listaTudo() throws SQLException {
