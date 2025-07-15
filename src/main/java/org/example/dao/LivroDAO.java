@@ -9,9 +9,6 @@ import java.sql.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-/**
- * Esqueci de colocar para exibir em buscaLivro, todos os livros que possuem o titulo inserido
- * */
 
 public class LivroDAO {
     Connection connection = ConnectionFactory.getConnection();
@@ -36,10 +33,21 @@ public class LivroDAO {
         }
     }
 
-    public void atualiza() {
+    public void atualiza(String titulo, Status status) {
+        // UPDATE CLIENTE SET EMAIL = 'lilian@hotmail.com' WHERE NOME = 'Lilian';
+        Livro livro = buscaLivro(titulo);
+        String sql = "update livro set status = ? where id = ?";
+        try {
+            prepared = connection.prepareStatement(sql);
+            prepared.setString(1, String.valueOf(status));
+            prepared.setInt(2, livro.getId());
+            prepared.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void excLui(int id) {
+    public void exclui(int id) {
         try{
             prepared = connection.prepareStatement("DELETE FROM livro WHERE id = ?");
             prepared.setInt(1, id);
@@ -49,22 +57,23 @@ public class LivroDAO {
         }
     }
 
-    public ArrayList<String> buscaLivros(String titulo){
-        Livro livro  = new Livro();
-        ArrayList <String> livroArrayList = new ArrayList<>();
+    public ArrayList<Livro> buscaLivros(String titulo){
+
+        ArrayList <Livro> livroArrayList = new ArrayList<>();
         try {
             prepared = connection.prepareStatement("SELECT * FROM livro WHERE nome = ?"); // criando um comando set incompleto
             prepared.setString(1, titulo); // adicionando o completo para subistituir o ponto de interrogação
             resultSet = prepared.executeQuery();
             while(resultSet.next()){ //ele verifica se a consulta encontrou o livro com o titulo informado
                 //se encontrou o livro, carrega os dados
+                Livro livro  = new Livro();
                 livro.setId(resultSet.getInt("id"));
                 livro.setTitulo(resultSet.getString("nome"));
                 livro.setAutor(resultSet.getString("autor"));
                 livro.setPaginas(resultSet.getInt("paginas"));
                 livro.setStatus(Status.valueOf(resultSet.getString("status")));
                 livro.setFormato(Formato.valueOf(resultSet.getString("formato")));
-                livroArrayList.add(String.valueOf(livro));
+                livroArrayList.add(livro);
             }
 
         } catch (SQLException e) {
@@ -87,29 +96,34 @@ public class LivroDAO {
                 livro.setPaginas(resultSet.getInt("paginas"));
                 livro.setStatus(Status.valueOf(resultSet.getString("status")));
                 livro.setFormato(Formato.valueOf(resultSet.getString("formato")));
+                return livro;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return livro;
+        return null;
     }
 
-    public void listaTudo() throws SQLException {
+    public void listaTudo() {
 
         ArrayList <String> livroArrayList = new ArrayList<>();
-        prepared = connection.prepareStatement("SELECT * FROM LIVRO");
-        resultSet = prepared.executeQuery();
-        while(resultSet.next()){
-            String autor  = resultSet.getString("autor");
-            int id = resultSet.getInt("id");
-            String titulo = resultSet.getString("nome");
-            int paginas = resultSet.getInt("paginas");
-            Status status = Status.valueOf(resultSet.getString("status"));
-            Formato formato =Formato.valueOf(resultSet.getString("formato"));
+        try {
+            prepared = connection.prepareStatement("SELECT * FROM LIVRO");
+            resultSet = prepared.executeQuery();
+            while(resultSet.next()){
+                String autor  = resultSet.getString("autor");
+                int id = resultSet.getInt("id");
+                String titulo = resultSet.getString("nome");
+                int paginas = resultSet.getInt("paginas");
+                Status status = Status.valueOf(resultSet.getString("status"));
+                Formato formato =Formato.valueOf(resultSet.getString("formato"));
 
-            Livro livro = new Livro(titulo, autor, paginas, status,formato);
-            livro.setId(id);
-            livroArrayList.add(String.valueOf(livro));
+                Livro livro = new Livro(titulo, autor, paginas, status,formato);
+                livro.setId(id);
+                livroArrayList.add(String.valueOf(livro));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         for (String livroString : livroArrayList) {
             System.out.println(livroString);
