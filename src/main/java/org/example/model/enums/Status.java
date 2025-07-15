@@ -5,5 +5,6 @@ public enum Status {
     QUERO_LER,
     LENDO,
     LI,
+    RELENDO,
     ABANDONEI
 }
