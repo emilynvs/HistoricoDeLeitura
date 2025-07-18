@@ -2,16 +2,20 @@ package org.example.dao;
 
 import org.example.ConnectionFactory;
 import org.example.model.Leitura;
+import org.example.model.Livro;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class LeituraDAO {
     Connection connection = ConnectionFactory.getConnection();
     PreparedStatement prepared;
     ResultSet resultSet;
-
+    LivroDAO dao = new LivroDAO();
     public void  salva(Leitura leitura){
         String sql = "INSERT INTO leitura(id_livro, data_inicio, paginas_lidas, nota, comentario, releitura) values(?,?,?,?,?,?)";
         try{
@@ -33,7 +37,27 @@ public class LeituraDAO {
     }
     public void  deleta(){
     }
-    public void exibe(){
+
+    public ArrayList<Leitura> exibeHistorico(String titulo){
+        Livro idLivro = dao.buscaLivro(titulo);
+        ArrayList<Leitura> livros = new ArrayList<>();
+        try {
+            prepared = connection.prepareStatement("SELECT * FROM leitura WHERE id_livro = ?");
+            prepared.setString(1, String.valueOf(idLivro.getId()));
+            resultSet = prepared.executeQuery();
+            while (resultSet.next()){
+                Leitura leitura = new Leitura();
+                leitura.setId(resultSet.getInt("id"));
+                leitura.setPaginasLidas(resultSet.getInt("paginas_lidas"));
+                leitura.setComentario(resultSet.getNString("comentario"));
+                leitura.setDataInicio(LocalDate.parse(resultSet.getString("data_inicio")));
+                livros.add(leitura);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return livros;
+
     }
     public Leitura listaTudo(){
         return null;
