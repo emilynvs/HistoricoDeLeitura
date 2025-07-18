@@ -88,4 +88,14 @@ public class Leitura {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Leitura{" +
+                "dataInicio=" + dataInicio +
+                ", idLivro=" + idLivro +
+                ", paginasLidas=" + paginasLidas +
+                ", comentario='" + comentario + '\'' +
+                '}';
+    }
 }
