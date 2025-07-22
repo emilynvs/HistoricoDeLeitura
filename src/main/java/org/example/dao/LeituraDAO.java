@@ -16,6 +16,7 @@ public class LeituraDAO {
     PreparedStatement prepared;
     ResultSet resultSet;
     LivroDAO dao = new LivroDAO();
+
     public void  salva(Leitura leitura){
         String sql = "INSERT INTO leitura(id_livro, data_inicio, paginas_lidas, nota, comentario, releitura) values(?,?,?,?,?,?)";
         try{
@@ -35,7 +36,35 @@ public class LeituraDAO {
     public void  atualiza(){
 
     }
-    public void  deleta(){
+    public void deleta (int id){//recebe o id do histórico de leitura
+        try {
+            prepared = connection.prepareStatement("DELETE FROM leitura WHERE id = ?");
+            prepared.setInt(1, id);
+            prepared.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Leitura buscaLeitura(int id){
+
+        Leitura leitura = new Leitura();
+        try {
+            prepared = connection.prepareStatement("SELECT * FROM leitura WHERE id= ?");
+            prepared.setInt(1, id);
+            resultSet = prepared.executeQuery();
+            if(resultSet.next()){
+                leitura.setComentario(resultSet.getString("comentario"));
+                leitura.setId(resultSet.getInt("id"));
+                leitura.setIdLivro(resultSet.getInt("id_livro"));
+                leitura.setPaginasLidas(resultSet.getInt("paginas_lidas"));
+                return leitura;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
     }
 
     public ArrayList<Leitura> exibeHistorico(String titulo){
@@ -48,6 +77,7 @@ public class LeituraDAO {
             while (resultSet.next()){
                 Leitura leitura = new Leitura();
                 leitura.setId(resultSet.getInt("id"));
+                leitura.setIdLivro(resultSet.getInt("id_livro"));
                 leitura.setPaginasLidas(resultSet.getInt("paginas_lidas"));
                 leitura.setComentario(resultSet.getNString("comentario"));
                 leitura.setDataInicio(LocalDate.parse(resultSet.getString("data_inicio")));
