@@ -33,9 +33,31 @@ public class LeituraDAO {
             throw new RuntimeException(e);
         }
     }
-    public void  atualiza(){
 
+    public void atualiza(int id, String coment, int pag) {
+        String sql;
+        boolean atualizaPaginas = pag > 0;
+
+        if(atualizaPaginas){
+            sql = "UPDATE leitura SET comentario = ?, paginas_lidas = ? WHERE id = ?";
+        } else {
+            sql = "UPDATE leitura SET comentario = ? WHERE id = ?";
+        }
+        try {
+            prepared = connection.prepareStatement(sql);
+            prepared.setString(1, coment);
+            if(atualizaPaginas){
+                prepared.setInt(2, pag);
+                prepared.setInt(3, id);
+            } else {
+                prepared.setInt(2, id);
+            }
+            prepared.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
     public void deleta (int id){//recebe o id do histórico de leitura
         try {
             prepared = connection.prepareStatement("DELETE FROM leitura WHERE id = ?");
@@ -89,6 +111,7 @@ public class LeituraDAO {
         return livros;
 
     }
+
     public Leitura listaTudo(){
         return null;
     }
