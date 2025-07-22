@@ -43,7 +43,7 @@ Construir uma **biblioteca pessoal virtual**, permitindo ao usuário:
 ---
 
 ## 🚧 Status
-Projeto em desenvolvimento
+Projeto em desenvolvimento \
 CRUD de livroDAO e leituraDAO finalizados
 
 ---
