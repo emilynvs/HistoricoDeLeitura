@@ -20,13 +20,13 @@ Construir uma **biblioteca pessoal virtual**, permitindo ao usuário:
 - [x] Visualização de todos os livros cadastrados
 - [x] Armazenamento em banco de dados MySQL
 - [x] Busca de livros por título
-- [ ] Edição de informações de um livro
+- [x] Edição de informações de um livro
 - [x] Remoção de livro do sistema
 
 ---
 
 ## 🔮 Funcionalidades futuras
-- [ ] Atualização de progresso de leitura (páginas lidas)
+- [x] Atualização de progresso de leitura (páginas lidas)
 - [ ] Filtro por autor, gênero, tipo e status
 - [ ] Lista de leitura desejada separada
 - [ ] Relatório com total de livros lidos
@@ -43,7 +43,7 @@ Construir uma **biblioteca pessoal virtual**, permitindo ao usuário:
 ---
 
 ## 🚧 Status
-Projeto em desenvolvimento CRUD em livro quase completo, histórico sendo iniciado
+Projeto em desenvolvimento CRUD de livroDAO e leituraDAO finalizados
 
 ---
 
