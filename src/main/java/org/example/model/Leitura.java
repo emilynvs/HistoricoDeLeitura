@@ -91,7 +91,7 @@ public class Leitura {
 
     @Override
     public String toString() {
-        return "Leitura{" +
+        return "\nLeitura{" +
                 "dataInicio=" + dataInicio +
                 ", idLivro=" + idLivro +
                 ", paginasLidas=" + paginasLidas +
