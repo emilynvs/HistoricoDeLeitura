@@ -34,7 +34,6 @@ public class LivroDAO {
     }
 
     public void atualiza(String titulo, Status status) {
-        // UPDATE CLIENTE SET EMAIL = 'lilian@hotmail.com' WHERE NOME = 'Lilian';
         Livro livro = buscaLivro(titulo);
         String sql = "update livro set status = ? where id = ?";
         try {
